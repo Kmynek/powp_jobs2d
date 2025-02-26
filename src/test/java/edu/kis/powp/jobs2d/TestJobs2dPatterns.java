@@ -37,6 +37,7 @@ public class TestJobs2dPatterns {
 //		application.addTest("Figures Jane", (ActionEvent e) -> {
 //		    FiguresJane.figureScript(new DriverAdapterForFiguresJane());
 //		});
+		
 
 	}
 
@@ -99,7 +100,7 @@ public class TestJobs2dPatterns {
 				Application app = new Application("2d jobs Visio");
 				DrawerFeature.setupDrawerPlugin(app);
 				//setupDefaultDrawerVisibilityManagement(app);
-
+				
 				DriverFeature.setupDriverPlugin(app);
 				setupDrivers(app);
 				setupPresetTests(app);
