@@ -1,18 +1,14 @@
-//package edu.kis.powp.jobs2d.drivers.adapter;
-//
-//import edu.kis.powp.jobs2d.AbstractDriver;
-//import edu.kis.powp.jobs2d.Job2dDriver;
-//import edu.kis.powp.jobs2d.features.DriverFeature;
-//
-//public class DriverAdapterForFiguresJane extends AbstractDriver {
-
-
 package edu.kis.powp.jobs2d.drivers.adapter;
 
 import edu.kis.powp.jobs2d.Job2dDriver;
 import edu.kis.powp.jobs2d.features.DriverFeature;
 
 public class DriverAdapterForFiguresJane implements Job2dDriver {
+    private Job2dDriver delegate;
+
+    public DriverAdapterForFiguresJane(Job2dDriver delegate){
+        this.delegate = delegate;
+    }
 	
 
     @Override
