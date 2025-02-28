@@ -13,10 +13,19 @@ public class OperateToCommand implements DriverCommand {
         this.y = y;
     }
 
-    
+
     public void setDriver(Job2dDriver driver) {
         this.driver = driver;
     }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     @Override
     public void execute() {
         driver.operateTo(x, y);

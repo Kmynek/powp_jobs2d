@@ -6,17 +6,20 @@ import edu.kis.legacy.drawer.shape.LineFactory;
 import edu.kis.powp.jobs2d.Job2dDriver;
 import edu.kis.powp.jobs2d.features.DrawerFeature;
 
+import java.util.function.Supplier;
+
 public class LineDrawerAdapter implements Job2dDriver {
     public enum LineMode { BASIC, SPECIAL }
     
     private int startX = 0, startY = 0;
     private DrawPanelController drawer;
-    private LineMode mode;
-    private int lineThickness = 1; 
+    private Supplier<ILine> lineSupplier;
+    private int lineThickness = 1;
 
-    public LineDrawerAdapter(LineMode mode) {
-        this.mode = mode;
-        this.drawer = DrawerFeature.getDrawerController();
+
+    public LineDrawerAdapter(Supplier<ILine> lineSupplier, DrawPanelController drawer) {
+        this.lineSupplier = lineSupplier;
+        this.drawer = drawer;
     }
 
     public void setLineThickness(int thickness) {
@@ -65,7 +68,7 @@ public class LineDrawerAdapter implements Job2dDriver {
             }
 
             // able to change spacing var to set the exact thickness simulation needed.
-            double spacing = 5.0;
+            double spacing = 2.0;
 
             for(double off : offsets) {
                 int newX1 = (int)Math.round(x1 + perpX * off * spacing);
@@ -76,18 +79,12 @@ public class LineDrawerAdapter implements Job2dDriver {
                 drawer.drawLine(line);
             }
         }
-        // Aktualizujemy pozycję początkową
         startX = x;
         startY = y;
     }
 
     private ILine createLine(int x1, int y1, int x2, int y2) {
-        ILine line;
-        if(mode == LineMode.SPECIAL) {
-            line = LineFactory.getSpecialLine();
-        } else {
-            line = LineFactory.getBasicLine();
-        }
+        ILine line = lineSupplier.get();
         line.setStartCoordinates(x1, y1);
         line.setEndCoordinates(x2, y2);
         return line;
@@ -95,6 +92,6 @@ public class LineDrawerAdapter implements Job2dDriver {
 
     @Override
     public String toString() {
-        return "LineDrawerAdapter (" + mode + ")";
+        return "LineDrawerAdapter";
     }
 }

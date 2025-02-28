@@ -14,12 +14,19 @@ public class CircleCommandFactory {
         //first point set
         int startX = centerX + radius;
         int startY = centerY;
-        circleCommand.addCommand(new SetPositionCommand(driver, startX, startY));
+        SetPositionCommand setPosCommand = new SetPositionCommand(driver, 0, 0);
+        setPosCommand.setX(startX);
+        setPosCommand.setY(startY);
+        circleCommand.addCommand(setPosCommand);
+
         for (int i = 1; i <= segments; i++) {
             double angle = i * angleStep;
             int x = centerX + (int)Math.round(radius * Math.cos(angle));
             int y = centerY + (int)Math.round(radius * Math.sin(angle));
-            circleCommand.addCommand(new OperateToCommand(driver, x, y));
+            OperateToCommand opCommand = new OperateToCommand(driver, 0, 0);
+            opCommand.setX(x);
+            opCommand.setY(y);
+            circleCommand.addCommand(opCommand);
         }
         return circleCommand;
     }

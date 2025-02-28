@@ -1,5 +1,11 @@
-/target/
-/doc/
-/.classpath
-/.project
-.settings
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Maven build folder
+target/
